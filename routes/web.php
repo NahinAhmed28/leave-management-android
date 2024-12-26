@@ -1,7 +1,7 @@
 <?php
-
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\EmployeeDashboardController;
+use App\Http\Controllers\LeaveTypeController;
 use App\Http\Controllers\SuperAdminDashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -40,5 +40,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
 });
 
+Route::middleware(['auth', 'role:admin,super-admin'])->group(function () {
+    Route::resource('leave-types', LeaveTypeController::class);
+});
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

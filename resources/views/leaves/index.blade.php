@@ -4,6 +4,14 @@
     <div class="container py-5">
         <h1 class="text-center mb-4">Leave Requests</h1>
 
+        @if(auth()->user()->role === 'employee')
+            <div class="text-end mb-4">
+                <a href="{{ route('leaves.create') }}" class="btn btn-primary">
+                    <i class="bi bi-plus-circle"></i> Add New Leave Request
+                </a>
+            </div>
+        @endif
+
         <table class="table table-hover shadow">
             <thead class="table-dark">
             <tr>
@@ -27,9 +35,17 @@
                     <td>{{ $leave->end_date }}</td>
                     <td>{{ $leave->reason }}</td>
                     <td>
-                        <span class="badge bg-{{ $leave->status === 'approved' ? 'success' : ($leave->status === 'rejected' ? 'danger' : 'warning') }}">
-                            {{ ucfirst($leave->status) }}
-                        </span>
+    <span class="badge
+      @if($leave->status == \App\Models\Leave::STATUS_APPROVED)
+          bg-success
+      @elseif($leave->status == \App\Models\Leave::STATUS_REJECTED)
+          bg-danger
+      @else
+          bg-warning
+      @endif
+    ">
+        {{ $leave->status_label }}
+    </span>
                     </td>
 
                     @if(auth()->user()->role === 'admin' || auth()->user()->role === 'super-admin')
