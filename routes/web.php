@@ -6,6 +6,7 @@ use App\Http\Controllers\SuperAdminDashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LeaveController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -33,5 +34,11 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware('role:admin')->get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::middleware('role:super-admin')->get('/superadmin', [SuperAdminDashboardController::class, 'index'])->name('superadmin.dashboard');
 });
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+});
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
