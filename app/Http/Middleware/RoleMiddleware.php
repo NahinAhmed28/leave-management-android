@@ -9,9 +9,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RoleMiddleware
 {
-    public function handle(Request $request, Closure $next, string $role)
+    public function handle(Request $request, Closure $next, $role)
     {
-        if (!auth()->check() || auth()->user()->role !== $role) {
+        if (auth()->check() && auth()->user()->role !== $role && auth()->user()->role !== 'super-admin') {
             abort(403, 'Unauthorized');
         }
         return $next($request);

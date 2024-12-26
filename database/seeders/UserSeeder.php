@@ -14,23 +14,27 @@ class UserSeeder extends Seeder
     public function run()
     {
         // Example users
+
         User::create([
-            'name' => 'admin',
-            'email' =>'admin'.'@gmail.com',
-            'password' =>Hash::make('password'),
+            'name' => 'Admin User',
+            'email' => 'admin@example.com',
+            'password' => Hash::make('password'),
+            'role' => 'admin',
             'email_verified_at' => now(),
             'created_at'=>	now(),
             'updated_at'=>now(),
         ]);
 
-//        DB::table('users')->insert([
-//            'name' => 'admin',
-//            'email' =>'admin'.'@gmail.com',
-//            'password' =>Hash::make('password'),
-//            'email_verified_at' => now(),
-//            'created_at'=>	now(),
-//            'updated_at'=>now(),
-//        ]);
-        // Add more users as needed
+        User::create([
+            'name' => 'Employee User',
+            'email' => 'employee@example.com',
+            'password' => Hash::make('password'),
+            'role' => 'employee',
+            'email_verified_at' => now(),
+            'created_at'=>	now(),
+            'updated_at'=>now(),
+        ]);
+
+
     }
 }
