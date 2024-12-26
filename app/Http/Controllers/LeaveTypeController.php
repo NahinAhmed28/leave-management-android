@@ -38,12 +38,19 @@ class LeaveTypeController extends Controller
     public function update(Request $request, LeaveType $leaveType)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'max_days' => 'required|integer|min:1',
+            'name'        => 'required|string|max:255',
+            'description' => 'nullable|string|max:255',
+            'max_days'    => 'required|integer|min:1',
         ]);
 
-        $leaveType->update($request->only('name', 'max_days'));
+        $leaveType->update([
+            'name'        => $request->name,
+            'description' => $request->description,
+            'max_days'    => $request->max_days,
+        ]);
 
-        return redirect()->route('leave-types.index')->with('success', 'Leave type updated successfully.');
+        return redirect()->route('leave-types.index')
+            ->with('success', 'Leave type updated successfully.');
     }
+
 }

@@ -18,7 +18,8 @@ return new class extends Migration
             $table->date('start_date');
             $table->date('end_date');
             $table->string('reason');
-            $table->tinyInteger('status')->default(0); // 0=pending, 1=approved, 2=rejected
+            $table->unsignedBigInteger('status')->comment('0=pending, 1=approved, 2=rejected')->default(0);
+
             $table->timestamps();
         });
     }

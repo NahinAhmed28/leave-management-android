@@ -49,30 +49,15 @@ class LeaveController extends Controller
         return redirect()->route('leaves.index')->with('success', 'Leave request submitted successfully.');
     }
 
-    public function update(Request $request, Leave $leave)
+    public function update(Request $request, $id)
     {
-        // Validate incoming status.
-        // If you're only toggling pending/approved/rejected = 0,1,2
-        $request->validate([
-            'status' => 'required|in:0,1,2',
-        ]);
+
+        $leave= Leave::where('id',$id)->first();
 
         $leave->update([
-            'status' => $request->status
+            'status' => $request->status,
         ]);
 
-        // If the status is approved, update approvals table
-        if ((int) $request->status === Leave::STATUS_APPROVED) {
-            // Create or update an approval entry
-            \App\Models\Approval::updateOrCreate(
-                ['leave_id' => $leave->id], // Unique, so only one row per leave
-                [
-                    'approver_id' => auth()->id(),
-                    'status' => 'approved',   // Could also store numeric or boolean here
-                    'comments' => 'Approved automatically by admin'
-                ]
-            );
-        }
 
         return redirect()->back()->with('success', 'Leave status updated.');
     }

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('leave_id')->constrained()->onDelete('cascade');
             $table->foreignId('approver_id')->constrained('users')->onDelete('cascade');  // User who approves/rejects
-            $table->enum('status', ['approved', 'rejected', 'pending'])->default('pending');
+//            $table->enum('status', ['approved', 'rejected', 'pending'])->default('pending');
             $table->text('comments')->nullable();
             $table->timestamps();
         });

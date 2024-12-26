@@ -36,30 +36,38 @@
                     <td>{{ $leave->reason }}</td>
                     <td>
     <span class="badge
-      @if($leave->status == \App\Models\Leave::STATUS_APPROVED)
+      @if($leave->status == 1)
           bg-success
-      @elseif($leave->status == \App\Models\Leave::STATUS_REJECTED)
+      @elseif($leave->status == 2)
           bg-danger
       @else
           bg-warning
       @endif
     ">
-        {{ $leave->status_label }}
+       @if($leave->status == 1)
+            Approved
+        @elseif($leave->status == 2)
+            Rejected
+        @else
+            Pending
+        @endif
     </span>
                     </td>
 
                     @if(auth()->user()->role === 'admin' || auth()->user()->role === 'super-admin')
                         <td>
-                            <form action="{{ route('leaves.update', $leave) }}" method="POST" class="d-inline">
+                            <form action="{{ route('leaves.update', $leave->id) }}" method="POST" class="d-inline">
                                 @csrf
                                 @method('PUT')
+
                                 <select name="status" class="form-select d-inline w-auto">
-                                    <option value="pending" {{ $leave->status === 'pending' ? 'selected' : '' }}>Pending</option>
-                                    <option value="approved" {{ $leave->status === 'approved' ? 'selected' : '' }}>Approve</option>
-                                    <option value="rejected" {{ $leave->status === 'rejected' ? 'selected' : '' }}>Reject</option>
+                                    <option value="0" {{ $leave->status == 0 ? 'selected' : '' }}>Pending</option>
+                                    <option value="1" {{ $leave->status == 1 ? 'selected' : '' }}>Approve</option>
+                                    <option value="2" {{ $leave->status == 2 ? 'selected' : '' }}>Reject</option>
                                 </select>
                                 <button type="submit" class="btn btn-primary btn-sm">Update</button>
                             </form>
+
                         </td>
                     @endif
                 </tr>

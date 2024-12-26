@@ -7,14 +7,16 @@
         <i class="bi bi-house-door"></i> Home
     </a>
 
-    @if(auth()->user()->role === 'admin' || auth()->user()->role === 'super-admin')
+    <a href="{{ route('leave-types.index') }}" class="{{ request()->is('leave-types*') ? 'active' : '' }}">
+        <i class="bi bi-tags"></i> Leave Types
+    </a>
+
+
+@if(auth()->user()->role === 'admin' || auth()->user()->role === 'super-admin')
         <a href="{{ route('leaves.index') }}" class="{{ request()->is('leaves*') ? 'active' : '' }}">
             <i class="bi bi-list-check"></i> Manage Leave Requests
         </a>
 
-        <a href="{{ route('leave-types.index') }}" class="{{ request()->is('leave-types*') ? 'active' : '' }}">
-            <i class="bi bi-tags"></i> Leave Types
-        </a>
     @else
         <a href="{{ route('leaves.index') }}" class="{{ request()->is('leaves*') ? 'active' : '' }}">
             <i class="bi bi-calendar-check"></i> My Leave Requests
