@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LeaveController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ApprovalsController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -33,6 +34,8 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware('role:employee')->get('/employee', [EmployeeDashboardController::class, 'index'])->name('employee.dashboard');
     Route::middleware('role:admin')->get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::middleware('role:super-admin')->get('/superadmin', [SuperAdminDashboardController::class, 'index'])->name('superadmin.dashboard');
+    
+Route::middleware('role:super-admin')->get('/approvals',[ApprovalsController::class, 'index'])->name('approvals.index');
 });
 
 

@@ -1,9 +1,11 @@
 <nav class="navbar navbar-expand-lg navbar-light shadow-sm" style="padding: 1rem 2rem; background: linear-gradient(135deg, #6e8efb, #a777e3);">
-    <div class="container-fluid">
-        <a class="navbar-brand text-white" href="{{ route('home') }}" style="font-size: 1.5rem; font-weight: 600;">Leave Management</a>
-        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
-        </button>
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center">
+            <a class="navbar-brand text-white me-3" href="{{ route('home') }}" style="font-size: 1.5rem; font-weight: 600;">Leave Management</a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+            </button>
+        </div>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav" style="gap: 1.5rem;">
 
@@ -25,18 +27,21 @@
                                 <i class="bi bi-list-check"></i> Manage Leave Requests
                             </a>
                         </li>
-                    @else
+                    @endif
 
+                    @if(auth()->user()->role === 'super-admin')
                         <li class="nav-item">
-                            <a class="nav-link text-white {{ request()->is('leaves*') ? 'active' : '' }}" href="{{ route('leaves.index') }}" style="font-size: 1.1rem;">
-                                <i class="bi bi-calendar-check"></i> My Leave Requests
+                            <a class="nav-link text-white {{ request()->is('approvals*') ? 'active' : '' }}" href="{{ route('approvals.index') }}" style="font-size: 1.1rem;">
+                                <i class="bi bi-clipboard-check"></i> Approvals
                             </a>
                         </li>
-
                     @endif
-                    <a class="nav-link text-white {{ request()->is('profile') ? 'active' : '' }}" href="{{ route('profile.show') }}" style="font-size: 1.1rem;">
-                        <i class="bi bi-person"></i> Profile
-                    </a>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white {{ request()->is('profile') ? 'active' : '' }}" href="{{ route('profile.show') }}" style="font-size: 1.1rem;">
+                            <i class="bi bi-person"></i> Profile
+                        </a>
+                    </li>
 
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
