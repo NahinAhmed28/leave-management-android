@@ -1,13 +1,11 @@
 <nav class="navbar navbar-expand-lg navbar-light shadow-sm" style="padding: 1rem 2rem; background: linear-gradient(135deg, #6e8efb, #a777e3);">
     <div class="container-fluid">
-        <a class="navbar-brand text-white" href="#" style="font-size: 1.5rem; font-weight: 600;">Leave Management</a>
+        <a class="navbar-brand text-white" href="{{ route('home') }}" style="font-size: 1.5rem; font-weight: 600;">Leave Management</a>
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav" style="gap: 1.5rem;">
-
-
 
                 @auth
                     <li class="nav-item">
