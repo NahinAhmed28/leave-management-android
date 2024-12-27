@@ -11,8 +11,8 @@
                 </a>
             </div>
         @endif
-
-        <table class="table table-hover shadow">
+        <div style="overflow-x:auto;">
+            <table class="table table-hover shadow">
             <thead class="table-dark">
             <tr>
                 <th>Employee</th>
@@ -78,5 +78,6 @@
             @endforelse
             </tbody>
         </table>
+        </div>
     </div>
 @endsection
